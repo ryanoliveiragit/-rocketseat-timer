@@ -1,3 +1,7 @@
 export function Home() {
-  return <h1>home</h1>
+  return (
+    <div>
+      <a href="/history">fds</a>
+    </div>
+  )
 }
