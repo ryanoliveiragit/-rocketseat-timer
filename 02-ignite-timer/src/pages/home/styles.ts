@@ -45,11 +45,11 @@ export const CountdownContainer = styled.div`
 `
 
 export const Separator = styled.div`
-    padding: 2rem 0;
-    color: ${props => props.theme['gray-500']};
+  padding: 2rem 0;
+  color: ${(props) => props.theme['gray-500']};
 
-    width: 4rem;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
+  width: 4rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 `

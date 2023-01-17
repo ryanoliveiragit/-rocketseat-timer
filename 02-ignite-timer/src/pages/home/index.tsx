@@ -1,5 +1,10 @@
 import { Play } from 'phosphor-react'
-import { CountdownContainer, FormContainer, HomeContainer, Separator } from './styles'
+import {
+  CountdownContainer,
+  FormContainer,
+  HomeContainer,
+  Separator,
+} from './styles'
 
 export function Home() {
   return (
