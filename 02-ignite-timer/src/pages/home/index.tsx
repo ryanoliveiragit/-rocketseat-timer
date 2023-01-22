@@ -51,7 +51,7 @@ export function Home() {
 
         <StartCountdownButton type="submit">
           <Play size={24} />
-          começãr
+          começar
         </StartCountdownButton>
       </form>
     </HomeContainer>
