@@ -10,13 +10,25 @@ import {
 } from './styles'
 
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  MinutesAmount: z,
+})
 
 export function Home() {
+  const { register, handleSubmit, watch } = useForm({
+    resolver: zodResolver(),
+  })
+
   const { register, handleSubmit, watch } = useForm()
 
   function handleCreateNewCycle(data: any) {}
 
   const task = watch('task')
+  const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
@@ -59,7 +71,7 @@ export function Home() {
           <span>0</span>
         </CountdownContainer>
 
-        <StartCountdownButton disabled={!task} type="submit">
+        <StartCountdownButton disabled={!isSubmitDisabled} type="submit">
           <Play size={24} />
           começar
         </StartCountdownButton>
