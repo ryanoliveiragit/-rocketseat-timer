@@ -36,7 +36,7 @@ const BaseInput = styled.input`
   font-weight: bold;
   font-size: 1.125rem;
   padding: 0 0.5rem;
-  color: $;
+  color: ${(props) => props.theme['gray-500']};
 `
 
 export const TaskInput = styled(BaseInput)``
