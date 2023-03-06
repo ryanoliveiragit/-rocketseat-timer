@@ -28,6 +28,7 @@ interface Cycle {
   id: string;
   task: string;
   minutesAmount: number;
+  isActive: boolean;
 }
 
 
@@ -40,20 +41,29 @@ export function Home() {
         minutesAmount: 0,
       },
     })
+
   const [cycles, setCycles] = useState<Cycle[]>([])
+  const [activeCycleId, setActiveCycleId] = useState<String | null>(null)
 
   function handleCreateNewCycle(data: NewCicleFormData) {
+    const id = String(new Date().getTime());
+
     const newCycle: Cycle = {
-      id: String(new Date().getTime()),
+      id,
       task: data.task,
-      minutesAmount: data.minutesAmount
+      minutesAmount: data.minutesAmount,
     }
 
     setCycles((state) => [...state, newCycle])
+    setActiveCycleId(id)
 
     reset()
   }
-  console.log(formState.errors)
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+
+
+  console.log(activeCycle)
 
   const task = watch('task')
   const isSubmitDisabled = !task
