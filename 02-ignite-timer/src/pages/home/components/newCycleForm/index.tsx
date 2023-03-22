@@ -1,12 +1,13 @@
 import { createContext, useContext } from "react";
 import * as zod from 'zod';
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CyclesContext } from "../..";
 import { FormContainer, MinutesAmountInput, TaskInput } from "./styles";
 
 export function NewCycleForm() {
   const { activeCycle } = useContext(CyclesContext);
+  const { register } = useFormContext();
   
     return (
         <FormContainer>
