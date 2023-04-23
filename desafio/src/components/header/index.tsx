@@ -48,19 +48,19 @@ export function Header() {
           </ContentHeader>
           <Benefits>
             <div>
-              <ShoppingCart className="yellowDark" size={16} weight="fill" />
+              <ShoppingCart className="yellowDark" weight="fill" />
               <h2>Compra simples e segura</h2>
             </div>
             <div>
-              <Package className="gray" size={16} weight="fill" />
+              <Package className="gray"weight="fill" />
               <h2>Entrega rápida e rastreada</h2>
             </div>
             <div>
-              <Timer className="yellow" size={16} weight="fill" />
+              <Timer className="yellow"  weight="fill" />
               <h2>Embalagem mantém o café intacto</h2>
             </div>
             <div>
-              <Coffee size={16} weight="fill" />
+              <Coffee weight="fill" />
               <h2>O café chega fresquinho até você</h2>
             </div>
           </Benefits>

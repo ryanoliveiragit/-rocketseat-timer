@@ -74,7 +74,8 @@ export const Benefits = styled.div`
 
   svg {
     justify-content: center;
-    padding: 0.5rem;
+    padding: 8px;
+    width: 16px;
     border-radius: 100%;
     background-color: ${(props) => props.theme.purple};
   }
@@ -154,6 +155,6 @@ export const Cart = styled(Button)`
 
 export const Image = styled.div`
   img {
-    width: 40rem;
+    width: 38rem;
   }
 `;
