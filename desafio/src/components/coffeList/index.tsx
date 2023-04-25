@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     ContainerCards,
     BuyCart,
@@ -9,6 +9,7 @@ import {
     Tags,
 } from "./styles";
 import { ShoppingCartSimple } from "@phosphor-icons/react";
+import cartContext from '../../contexts/myContexts'
 
 interface Cafe {
     id: number;
@@ -24,21 +25,46 @@ interface CafeListProps {
 }
 
 export function CafeList({ cafes }: CafeListProps) {
-    const [counts, setCounts] = useState<{ [key: number]: number }>({});
+    const { item, setItem }: any = useContext(cartContext);
+
+    useEffect(() => {
+        const cachedItems = localStorage.getItem("cartItems");
+
+        if (cachedItems) {
+            setItem(JSON.parse(cachedItems));
+        }
+    }, [setItem]);
 
     function handleAddCount(id: number) {
-        setCounts((prevCounts) => ({
-            ...prevCounts,
-            [id]: (prevCounts[id] || 0) + 1,
+        setItem((prevItems: any) => ({
+            ...prevItems,
+            [id]: (prevItems[id] || 0) + 1,
         }));
+
+        localStorage.setItem(
+            "cartItems",
+            JSON.stringify({
+                ...item,
+                [id]: (item[id] || 0) + 1,
+            })
+        );
     }
 
     function handleRemoveCount(id: number) {
-        setCounts((prevCounts) => ({
-            ...prevCounts,
-            [id]: Math.max((prevCounts[id] || 0) - 1, 0),
+        setItem((prevItems: any) => ({
+            ...prevItems,
+            [id]: Math.max((prevItems[id] || 0) - 1, 0),
         }));
+
+        localStorage.setItem(
+            "cartItems",
+            JSON.stringify({
+                ...item,
+                [id]: Math.max((item[id] || 0) - 1, 0),
+            })
+        );
     }
+    console.log(item)
 
     return (
         <Container>
@@ -83,7 +109,7 @@ export function CafeList({ cafes }: CafeListProps) {
                                         >
                                             -
                                         </button>
-                                        <span>{counts[cafe.id] ?? 0}</span>
+                                        <span>{item[cafe.id] ?? 0}</span>
                                         <button onClick={() => handleAddCount(cafe.id)}>+</button>
                                     </div>
                                     <Cart>

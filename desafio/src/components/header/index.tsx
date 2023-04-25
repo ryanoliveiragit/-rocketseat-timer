@@ -1,42 +1,23 @@
 import {
   Container,
-  HeaderContainer,
-  Button,
   BackgroundContainer,
-  Cart,
   Image,
   Benefits,
   ContentHeader,
 } from "./styles";
-  import Logo from "../../assets/Logo.svg";
   import ImageCoffe from "../../assets/CoffeImageHeader.svg";
   import {
   ShoppingCart,
   Timer,
-  MapPin,
   Package,
   Coffee,
 } from "@phosphor-icons/react";
+import { Navbar } from "./navBar";
 
 export function Header() {
   return (
     <Container>
-      <HeaderContainer>
-        <img src={Logo} alt="" />
-        <ul>
-          <li>
-            <Button>
-              <MapPin size={22} weight="fill" />
-              Porto Alegre, RS
-            </Button>
-          </li>
-          <li>
-            <Cart>
-              <ShoppingCart size={22} weight="fill" />
-            </Cart>
-          </li>
-        </ul>
-      </HeaderContainer>
+      <Navbar />
       <main>
         <BackgroundContainer>
           <ContentHeader>
@@ -67,7 +48,7 @@ export function Header() {
         </BackgroundContainer>
         <BackgroundContainer>
           <Image>
-            <img src={ImageCoffe} alt="" />
+            <img src={ImageCoffe} alt="imagem de café" />
           </Image>
         </BackgroundContainer>
       </main>
