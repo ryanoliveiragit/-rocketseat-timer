@@ -8,7 +8,7 @@ export const coffeList = [
         id: 1,
         name: 'Expresso Tradicional',
         description: 'O tradicional café feito com água quente e grãos moídos',
-        tag: 'TRADICIONAL',
+        tag: ['TRADICIONAL'],
         image: `${ExpressoTradicional}`,
         price: '9,90'
     },
@@ -16,7 +16,7 @@ export const coffeList = [
         id: 2,
         name: 'Expresso Americano',
         description: 'Expresso diluído, menos intenso que o tradicional',
-        tag: 'TRADICIONAL',
+        tag: ['TRADICIONAL'],
         image: `${ExpressoAmericano}`,
         price: '9,90'
     },
@@ -24,47 +24,79 @@ export const coffeList = [
         id: 3,
         name: 'Expresso Cremoso',
         description: 'Café expresso tradicional com espuma cremosa',
-        tag: 'TRADICIONAL',
+        tag: ['TRADICIONAL'],
         image: `${ExpressoCremoso}`,
         price: '9,90'
     },
     {
         id: 5,
-        name: 'Expresso Gelado',
-        description: 'Bebida preparada com café expresso e cubos de gelo',
-        tag: 'TRADICIONAL' + 'GELADO',
+        name: 'Café com Leite',
+        description: 'Meio a meio de expresso tradicional com leite vaporizado',
+        tag: ['TRADICIONAL','COM LEITE'],
         image: `${ExpressoGelado}`,
         price: '9,90'
     },
     {
         id: 6,
-        name: 'Expresso Tradicional',
-        description: 'O tradicional café feito com água quente e grãos moídos',
-        tag: 'TRADICIONAL',
+        name: 'Latte',
+        description: 'Uma dose de café expresso com o dobro de leite e espuma cremosa',
+        tag: ['TRADICIONAL', 'COM LEITE'],
         image: `${ExpressoTradicional}`,
         price: '9,90'
     },
     {
         id: 7,
-        name: 'Expresso Americano',
-        description: 'Expresso diluído, menos intenso que o tradicional',
-        tag: 'TRADICIONAL',
+        name: 'Capuccino',
+        description: 'Bebida com canela feita de doses iguais de café, leite e espuma',
+        tag: ['TRADICIONAL', 'COM LEITE'],
         image: `${ExpressoAmericano}`,
         price: '9,90'
     },
     {
         id: 8,
-        name: 'Expresso Cremoso',
-        description: 'Café expresso tradicional com espuma cremosa',
-        tag: 'TRADICIONAL',
+        name: 'Macchiato',
+        description: 'Café expresso misturado com um pouco de leite quente e espuma',
+        tag: ['TRADICIONAL', 'COM LEITE'],
         image: `${ExpressoCremoso}`,
         price: '9,90'
     },
     {
         id: 9,
-        name: 'Expresso Gelado',
-        description: 'Bebida preparada com café expresso e cubos de gelo',
-        tag: 'TRADICIONAL' + 'GELADO',
+        name: 'Chocolate Quente',
+        description: 'Bebida feita com chocolate dissolvido no leite quente e café',
+        tag: ['TRADICIONAL', 'COM LEITE'],
+        image: `${ExpressoGelado}`,
+        price: '9,90'
+    },
+    {
+        id: 10,
+        name: 'Cubano',
+        description: 'Drink gelado de café expresso com rum, creme de leite e hortelã ',
+        tag: ['TRADICIONAL', 'COM LEITE', 'ALCOÓLICO'],
+        image: `${ExpressoGelado}`,
+        price: '9,90'
+    },
+    {
+        id: 11,
+        name: 'Árabe',
+        description: 'Bebida preparada com grãos de café árabe e especiarias',
+        tag: ['ESPECIAL'],
+        image: `${ExpressoGelado}`,
+        price: '9,90'
+    },
+    {
+        id: 12,
+        name: 'Mocaccino',
+        description: 'Café expresso com calda de chocolate, pouco leite e espuma',
+        tag: ['TRADICIONAL', 'COM LEITE'],
+        image: `${ExpressoGelado}`,
+        price: '9,90'
+    },
+    {
+        id: 13,
+        name: 'Irlandês',
+        description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
+        tag: ['ESPECIAL', 'ALCOÓLICO'],
         image: `${ExpressoGelado}`,
         price: '9,90'
     },

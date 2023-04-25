@@ -8,9 +8,9 @@ import {
   Benefits,
   ContentHeader,
 } from "./styles";
-import Logo from "../../assets/Logo.svg";
-import ImageCoffe from "../../assets/CoffeImageHeader.svg";
-import {
+  import Logo from "../../assets/Logo.svg";
+  import ImageCoffe from "../../assets/CoffeImageHeader.svg";
+  import {
   ShoppingCart,
   Timer,
   MapPin,

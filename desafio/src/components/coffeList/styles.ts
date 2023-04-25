@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 10rem;
-  display: flex;
-  justify-content: space-between;
+  h1 {
+    padding-bottom: 3.3rem;
+  }
+  width: 100%;
 
   ul {
-    gap: 2rem;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    gap: 3rem;
+
     padding: 0;
     margin: 0;
-    justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
     list-style: none;
   }
 
@@ -19,24 +21,32 @@ export const Container = styled.div`
     width: 16rem;
   }
 `;
+export const Tags = styled.div`
+  justify-content: center;
+  width: 100%;
+  display: flex;
 
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+`;
 export const ContainerCards = styled.div`
   background-color: ${(props) => props.theme["base-card"]};
 
   border-radius: 6px 36px;
   padding: 0rem 1.25rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
   text-align: center;
-
-  > span {
+  > div > span {
+    font-size: 0.55rem;
     background-color: ${(props) => props.theme["yellow-light"]};
     color: ${(props) => props.theme["yellow-dark"]};
 
     border-radius: 100px;
-    padding: 4px 8px;
+    padding: 5px 8px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -46,7 +56,6 @@ export const ContainerCards = styled.div`
     font-family: "Roboto";
     font-style: normal;
     font-weight: 700;
-    font-size: 0.6rem;
     line-height: 130%;
   }
 
@@ -82,7 +91,7 @@ export const BuyCart = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.2rem;
+    gap: 8px;
   }
   padding-bottom: 2rem;
   display: flex;
@@ -118,6 +127,7 @@ export const Count = styled.div`
     flex-wrap: wrap;
   }
   > div > button {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     font-weight: 200;
@@ -126,4 +136,16 @@ export const Count = styled.div`
   }
 `;
 
-export const Cart = styled.div``;
+export const Cart = styled.div`
+  background-color: ${(props) => props.theme["purple-dark"]};
+  padding: 11px;
+  gap: 8px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+
+  > svg {
+    cursor: pointer;
+    fill: ${(props) => props.theme.white};
+  }
+`;
