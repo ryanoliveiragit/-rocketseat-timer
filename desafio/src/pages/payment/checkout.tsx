@@ -5,18 +5,25 @@ import cartContext from "../../contexts/myContexts";
 
 export function Checkout() {
     const {item , setItem }:any = useContext(cartContext);
+
     useEffect(() => {
         const cachedItem = localStorage.getItem("cartItems");
         if (cachedItem !== null && cachedItem !== undefined) {
           setItem(JSON.parse(cachedItem));
         }
-      }, []);
+      }, [setItem]);
 
-      console.log(item)
+      const id = item.id
+      console.log(id)
+      
     return(
         <Layout>
         <Navbar />
-        <h1>oi</h1>
+        {Object.entries(item).map(([key, value]) => {
+          return(
+            <li key={key}> {`${item}`}</li>
+          )
+        })}
         </Layout>
     )
 }
