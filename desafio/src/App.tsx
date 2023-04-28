@@ -3,9 +3,9 @@ import { ThemeProvider } from "styled-components";
 import { defaultTheme } from './styles/themes/default'
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from "./routes/routes";
-import cartContext  from '../src/contexts/myContexts'
 import { useState } from 'react';
 import { CoffeeType } from './@types/coffe';
+import CartContext from './contexts/myContexts';
 
 
 export function App() {
@@ -14,11 +14,11 @@ export function App() {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
-        <cartContext.Provider value={{coffee, setCoffee}}>
+        <CartContext.Provider value={{coffee, setCoffee}}>
           <BrowserRouter >
             <Router />
           </BrowserRouter>
-        </cartContext.Provider>
+        </CartContext.Provider>
         <GlobalStyle />
       </ThemeProvider>
     </>

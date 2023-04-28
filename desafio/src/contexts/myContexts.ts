@@ -1,5 +1,17 @@
 import { createContext } from "react";
+import { CoffeeType } from '../@types/coffe'
 
-const cartContext = createContext({})
+type CartContext = {
+  coffee: CoffeeType[];
+  setCoffee: (coffees: CoffeeType[]) => void;
+}
 
-export default cartContext
+const initialCartContext: CartContext = {
+  coffee: [],
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setCoffee: () => {},
+};
+
+const CartContext = createContext(initialCartContext);
+
+export default CartContext;

@@ -6,6 +6,7 @@ export function Checkout() {
   
   const itensString = localStorage.getItem('cartItems');
   const itens = itensString ? JSON.parse(itensString) : [];
+  console.log(itens)
 
   return (
     <Layout>

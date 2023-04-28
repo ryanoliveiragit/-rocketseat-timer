@@ -14,7 +14,14 @@ import { coffeList } from "../../components/coffeList/list";
 import { CoffeeType } from "../../@types/coffe";
 
 export function CafeList() {
-  const { coffee, setCoffee }: any = useContext(cartContext);
+  const { coffee, setCoffee } = useContext(cartContext);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      setCoffee(JSON.parse(cartItems));
+    }
+  }, [setCoffee]);
 
   const memoizedCoffeList = useMemo(() => {
     return coffeList.map((cafe) => {
@@ -31,19 +38,21 @@ export function CafeList() {
     });
   }, [coffee]);
 
-
   function handleRemoveToCart(coffeeName: string) {
-    const index = coffee.findIndex((item: { name: string }) => item.name === coffeeName);
+    const updatedCoffee = [...coffee];
+    const index = updatedCoffee.findIndex(
+      (item: { name: string }) => item.name === coffeeName
+    );
 
     if (index === -1) {
       console.log("Erro: item não encontrado no carrinho.");
       return;
     }
 
-    const updatedCoffee = [...coffee];
     updatedCoffee.splice(index, 1);
 
     setCoffee(updatedCoffee);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCoffee));
   }
 
   function handleAddToCart(cafeId: string) {
@@ -52,11 +61,13 @@ export function CafeList() {
       console.log("Erro: café não encontrado na lista.");
       return;
     }
-  
+
     const updatedCoffeList = [...memoizedCoffeList];
     const index = updatedCoffeList.findIndex((cafe) => cafe.id === cafeId);
-    updatedCoffeList[index].quantity = (parseInt(selectedCafe.quantity) + 1).toString();
-  
+    updatedCoffeList[index].quantity = (
+      parseInt(selectedCafe.quantity) + 1
+    ).toString();
+
     const newCartItem: CoffeeType = {
       id: selectedCafe.id,
       name: selectedCafe.name,
@@ -66,38 +77,27 @@ export function CafeList() {
       image: selectedCafe.image,
       tag: selectedCafe.tag,
     };
-  
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify({
-        ...coffee,
-        [cafeId]: (coffee[cafeId] || 0) + 1,
-      })
-    );
-  
-    setCoffee((prevCoffee: string) => {
-      const newCoffee = [...prevCoffee, newCartItem];
-      return newCoffee;
-    });
+
+    const updatedCoffee = [...coffee, newCartItem];
+    setCoffee(updatedCoffee);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCoffee));
   }
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(coffee));
-    localStorage.getItem('cartItems');
-    localStorage.getItem('itemsCount');
-  }, [coffee]);
 
-  const cartItemsCount = coffee.reduce((acc: { [x: string]: number; }, curr: { id: string; }) => {
-    if (curr.id in acc) {
-      acc[curr.id] += 1;
-    } else {
-      acc[curr.id] = 1;
-    }
-    return acc
-  }, {});
+  const cartItemsCount = coffee.reduce(
+    (acc: { [x: string]: number }, curr: { id: string }) => {
+      if (curr.id in acc) {
+        acc[curr.id] += 1;
+      } else {
+        acc[curr.id] = 1;
+      }
+      return acc;
+    },
+    {}
+  );
 
-  console.log(coffee)
   const numItems = Object.keys(coffee).length;
-  console.log(numItems)
+  console.log(numItems);
+
   return (
     <Container>
       <h1>Nossos cafés</h1>
@@ -137,14 +137,19 @@ export function CafeList() {
                   </div>
                   <Count>
                     <div className="count">
-                      <button onClick={() => handleRemoveToCart(cafe.name)}
+                      <button
+                        onClick={() => handleRemoveToCart(cafe.name)}
                         className="remove"
                       >
                         -
                       </button>
                       <span>{itemCount}</span>
-                      <button className="add" onClick={() => handleAddToCart(cafe.id)}>+</button>
-
+                      <button
+                        className="add"
+                        onClick={() => handleAddToCart(cafe.id)}
+                      >
+                        +
+                      </button>
                     </div>
                     <Cart>
                       <ShoppingCartSimple size={15} weight="fill" />
@@ -153,9 +158,8 @@ export function CafeList() {
                 </BuyCart>
               </ContainerCards>
             </li>
-          )
-        }
-        )}
+          );
+        })}
       </ul>
     </Container>
   );
