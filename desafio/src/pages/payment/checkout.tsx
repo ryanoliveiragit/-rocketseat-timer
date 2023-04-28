@@ -4,26 +4,18 @@ import { Layout } from "../../components/layout";
 import cartContext from "../../contexts/myContexts";
 
 export function Checkout() {
-    const {item , setItem }:any = useContext(cartContext);
+  
+  const itensString = localStorage.getItem('cartItems');
+  const itens = itensString ? JSON.parse(itensString) : [];
 
-    useEffect(() => {
-        const cachedItem = localStorage.getItem("cartItems");
-        if (cachedItem !== null && cachedItem !== undefined) {
-          setItem(JSON.parse(cachedItem));
-        }
-      }, [setItem]);
-
-      const id = item.id
-      console.log(id)
-      
-    return(
-        <Layout>
-        <Navbar />
-        {Object.entries(item).map(([key, value]) => {
-          return(
-            <li key={key}> {`${item}`}</li>
-          )
-        })}
-        </Layout>
-    )
+  return (
+    <Layout>
+      <Navbar />
+      <ul>
+        {itens.map((item: any) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </Layout>
+  );
 }
