@@ -160,7 +160,7 @@ export const Cart = styled(Button)`
     position: absolute;
     color: ${(props) => props.theme.white};
     font-size: 0.7rem;
-    background-color: red;
+    background-color: ${(props) => props.theme["yellow-dark"]};;
     padding: 0.25rem .5rem;
     border-radius: 100%;
     right: -0.3rem;

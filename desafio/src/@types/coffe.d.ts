@@ -5,5 +5,5 @@ export type CoffeeType = {
     description: string;
     image: string;
     tag: string[];
-    price: string;
+    price: number;
   };

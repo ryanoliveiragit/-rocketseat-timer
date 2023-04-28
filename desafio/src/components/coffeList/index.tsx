@@ -38,7 +38,19 @@ export function CafeList() {
     });
   }, [coffee]);
 
-  function handleRemoveToCart(coffeeName: string) {
+  function handleRemoveToCart(coffeeName: string, cafeId: string) {
+    const selectedCafe = memoizedCoffeList.find((cafe) => cafe.id === cafeId);
+    if (selectedCafe == null) {
+      console.log("Erro: café não encontrado na lista.");
+      return;
+    }
+
+    const updatedCoffeList = [...memoizedCoffeList];
+    const aaaaa = updatedCoffeList.findIndex((cafe) => cafe.id === cafeId);
+    updatedCoffeList[aaaaa].quantity = (
+      parseInt(selectedCafe.quantity) - 1
+    ).toString();
+
     const updatedCoffee = [...coffee];
     const index = updatedCoffee.findIndex(
       (item: { name: string }) => item.name === coffeeName
@@ -80,6 +92,7 @@ export function CafeList() {
 
     const updatedCoffee = [...coffee, newCartItem];
     setCoffee(updatedCoffee);
+    
     localStorage.setItem("cartItems", JSON.stringify(updatedCoffee));
   }
 
@@ -138,7 +151,7 @@ export function CafeList() {
                   <Count>
                     <div className="count">
                       <button
-                        onClick={() => handleRemoveToCart(cafe.name)}
+                        onClick={() => handleRemoveToCart(cafe.name, cafe.id )}
                         className="remove"
                       >
                         -
