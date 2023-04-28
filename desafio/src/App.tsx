@@ -5,21 +5,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { Router } from "./routes/routes";
 import cartContext  from '../src/contexts/myContexts'
 import { useState } from 'react';
+import { CoffeeType } from './@types/coffe';
 
-export type CoffeeType = {
-  quantity: string;
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  tag: string[];
-  price: string;
-};
 
 export function App() {
-  const [coffee, setCoffee] = useState<CoffeeType[]>([
-  ]);
-
+  const [coffee, setCoffee] = useState<CoffeeType[]>([]);
 
   return (
     <>

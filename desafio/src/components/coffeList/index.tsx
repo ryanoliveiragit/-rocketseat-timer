@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import {
   ContainerCards,
   BuyCart,
@@ -11,18 +11,9 @@ import {
 import { ShoppingCartSimple } from "@phosphor-icons/react";
 import cartContext from "../../contexts/myContexts";
 import { coffeList } from "../../components/coffeList/list";
+import { CoffeeType } from "../../@types/coffe";
 
-interface CartItem {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  tag: string[];
-  price: string;
-  quantity: string;
-}
-
-export function CafeList(cafeId: string) {
+export function CafeList() {
   const { coffee, setCoffee }: any = useContext(cartContext);
 
   const memoizedCoffeList = useMemo(() => {
@@ -66,7 +57,7 @@ export function CafeList(cafeId: string) {
     const index = updatedCoffeList.findIndex((cafe) => cafe.id === cafeId);
     updatedCoffeList[index].quantity = (parseInt(selectedCafe.quantity) + 1).toString();
   
-    const newCartItem: CartItem = {
+    const newCartItem: CoffeeType = {
       id: selectedCafe.id,
       name: selectedCafe.name,
       price: selectedCafe.price,
@@ -84,7 +75,7 @@ export function CafeList(cafeId: string) {
       })
     );
   
-    setCoffee((prevCoffee: any) => {
+    setCoffee((prevCoffee: string) => {
       const newCoffee = [...prevCoffee, newCartItem];
       return newCoffee;
     });
@@ -111,7 +102,7 @@ export function CafeList(cafeId: string) {
     <Container>
       <h1>Nossos cafés</h1>
       <ul>
-        {coffeList.map((cafe: any) => {
+        {coffeList.map((cafe: CoffeeType) => {
           const itemCount = cartItemsCount[cafe.id] || 0;
           return (
             <li key={cafe.id}>

@@ -1,7 +1,6 @@
-import { useContext, useEffect } from "react";
 import { Navbar } from "../../components/header/navBar";
 import { Layout } from "../../components/layout";
-import cartContext from "../../contexts/myContexts";
+import { CoffeeType } from "../../@types/coffe";
 
 export function Checkout() {
   
@@ -12,7 +11,7 @@ export function Checkout() {
     <Layout>
       <Navbar />
       <ul>
-        {itens.map((item: any) => (
+        {itens.map((item: CoffeeType) => (
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>

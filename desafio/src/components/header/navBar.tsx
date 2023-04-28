@@ -13,7 +13,7 @@ import {
   import cartContext from "../../contexts/myContexts";
 
 export function Navbar() {
-  const { coffee, setCoffee }: any = useContext(cartContext);
+  const { coffee }: any = useContext(cartContext);
   
   const numItems = Object.keys(coffee).length;
   console.log(numItems)
