@@ -24,12 +24,6 @@ interface CartItem {
 
 export function CafeList(cafeId: string) {
   const { coffee, setCoffee }: any = useContext(cartContext);
-  
-
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(coffee));
-    localStorage.getItem('cartItems');
-  }, [coffee, setCoffee]);
 
   const memoizedCoffeList = useMemo(() => {
     return coffeList.map((cafe) => {
@@ -95,7 +89,12 @@ export function CafeList(cafeId: string) {
       return newCoffee;
     });
   }
-  
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(coffee));
+    localStorage.getItem('cartItems');
+    localStorage.getItem('itemsCount');
+  }, [coffee]);
+
   const cartItemsCount = coffee.reduce((acc: { [x: string]: number; }, curr: { id: string; }) => {
     if (curr.id in acc) {
       acc[curr.id] += 1;
@@ -106,6 +105,8 @@ export function CafeList(cafeId: string) {
   }, {});
 
   console.log(coffee)
+  const numItems = Object.keys(coffee).length;
+  console.log(numItems)
   return (
     <Container>
       <h1>Nossos cafés</h1>

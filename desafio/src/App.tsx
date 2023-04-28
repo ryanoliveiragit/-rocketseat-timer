@@ -18,15 +18,6 @@ export type CoffeeType = {
 
 export function App() {
   const [coffee, setCoffee] = useState<CoffeeType[]>([
-    {
-      quantity: '0',
-      id: '1',
-      name: '',
-      description: '',
-      image: '',
-      tag: [''],
-      price: '',
-    },
   ]);
 
 

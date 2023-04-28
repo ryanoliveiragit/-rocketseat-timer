@@ -105,6 +105,7 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Button = styled.button`
+
   background-color: ${(props) => props.theme["purple-light"]};
 
   display: flex;
@@ -113,6 +114,7 @@ export const Button = styled.button`
   padding: 0.5rem;
   gap: 4px;
   border-radius: 6px;
+
 
   background-color: ${(props) => props.theme["purple-light"]};
   color: ${(props) => props.theme["purple-dark"]};
@@ -138,6 +140,10 @@ export const Button = styled.button`
 `;
 
 export const Cart = styled(Button)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${(props) => props.theme["yellow-light"]};
   :hover {
     transition: background-color 0.15s ease-out;
@@ -147,11 +153,24 @@ export const Cart = styled(Button)`
       color: ${(props) => props.theme["yellow-light"]};
     }
   }
-
   svg {
     color: ${(props) => props.theme["yellow-dark"]};
   }
+  p {
+    position: absolute;
+    color: ${(props) => props.theme.white};
+    font-size: 0.7rem;
+    background-color: red;
+    padding: 0.25rem .5rem;
+    border-radius: 100%;
+    right: -0.3rem;
+    top: -1.6rem;
+  }
 `;
+
+export const None = styled.span`
+  display: none;
+`
 
 export const Image = styled.div`
   img {
