@@ -1,41 +1,62 @@
-import {Layout} from "../../components/layout";
+import { CoffeeType } from "../../@types/coffe";
 import { Navbar } from "../../components/header/navBar";
-
+import { Layout } from "../../components/layout";
+import { useCart } from "../../contexts/myContexts";
+import { Form } from "../../components/form";
+import { 
+  Container,
+  Title
+ } from "./styles";
 
 export function Checkout() {
-  const itensString = localStorage.getItem('cartItems');
-  const itens = itensString ? JSON.parse(itensString) : [];
-  
-  const countByName = itens.reduce((count: any, { name, price }: any) => {
-    if (!count[name]) {
-      count[name] = {
-        quantity: 1,
-        price: parseFloat(price),
-      };
-    } else {
-      count[name].quantity += 1;
+  const { cart, addNewItem, removeItem, countItems } = useCart();
+
+  function addcart(data: CoffeeType) {
+    addNewItem(data)
+  }
+
+  function removeCart(itemId: number) {
+    removeItem(itemId)
+  }
+
+  const groupedCoffees = cart.reduce((groups: { [key: string]: CoffeeType[] }, cafe) => {
+    const name = cafe.name;
+    if (!groups[name]) {
+      groups[name] = [];
     }
-    return count;
+    groups[name].push(cafe);
+    return groups;
   }, {});
-    
-  console.log(countByName);
-  const items = Object.entries(countByName);
-  const total = items.reduce((acc: number, [, item]: [string, any]) => {
-    const itemPrice = Number(item.price);
-    return acc + itemPrice * item.quantity;
-  }, 0);
-    
+
+  const sortedKeys = Object.keys(groupedCoffees).sort();
+
+  console.log(cart)
+
   return (
     <Layout>
       <Navbar />
-      <ul>
-        {items.map(([name, data]: [string, any]) => (
-          <li key={name}>
-            {name} ({data.quantity}x) - R$ {parseFloat(data.price) * data.quantity}
-          </li>
-        ))}
-      </ul>
-      <div>Total: R$ {total}</div>
+      <Title>Complete seu pedido</Title>
+      <Container>
+        <div>
+          <Form />
+        </div>
+        <div>
+          <ul>
+            {sortedKeys.map((name) => {
+              const cafe = groupedCoffees[name][0];
+              const count = countItems(cafe.id)
+              return (
+                <div>
+                  <li>{cafe.name}</li>
+                  <button onClick={() => addcart(cafe)}>Adicionar</button>
+                  <span>{count}</span>
+                  <button onClick={() => removeCart(cafe.id)}>remover</button>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+      </Container>
     </Layout>
-  )
+  );
 }

@@ -5,17 +5,11 @@ import {
   Benefits,
   ContentHeader,
 } from "./styles";
-  import ImageCoffe from "../../assets/CoffeImageHeader.svg";
-  import {
-  ShoppingCart,
-  Timer,
-  Package,
-  Coffee,
-} from "@phosphor-icons/react";
+import ImageCoffe from "../../assets/CoffeImageHeader.svg";
+import { ShoppingCart, Timer, Package, Coffee } from "@phosphor-icons/react";
 import { Navbar } from "./navBar";
 
 export function Header() {
-
   return (
     <Container>
       <Navbar />
@@ -34,11 +28,11 @@ export function Header() {
               <h2>Compra simples e segura</h2>
             </div>
             <div>
-              <Package className="gray"weight="fill" />
+              <Package className="gray" weight="fill" />
               <h2>Entrega rápida e rastreada</h2>
             </div>
             <div>
-              <Timer className="yellow"  weight="fill" />
+              <Timer className="yellow" weight="fill" />
               <h2>Embalagem mantém o café intacto</h2>
             </div>
             <div>
