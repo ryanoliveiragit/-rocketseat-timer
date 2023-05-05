@@ -21,7 +21,7 @@ type CartProviderProps = {
   children: React.ReactNode;
 };
 
-// Aqui tu cria o provider
+//Aqui tu cria o provider
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CoffeeType[]>(() => {
     const storedCart = localStorage.getItem("coffeeCart");

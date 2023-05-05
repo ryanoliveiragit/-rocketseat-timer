@@ -7,8 +7,6 @@ export const Container = styled.div`
     flex-direction: column;
     display: flex;
     gap: 0.75rem;
-    h1 {
-    }
   }
 `;
 export const ContainerForm = styled.div`
@@ -29,9 +27,9 @@ export const ContainerInputs = styled.div`
   }
 `;
 const baseInput = styled.div`
-  input:focus{
+  input:focus {
     outline: 1px solid ${(props) => props.theme["yellow-dark"]};
-    color:  ${(props) => props.theme["base-text"]};
+    color: ${(props) => props.theme["base-text"]};
   }
   input {
     background-color: ${(props) => props.theme["base-input"]};
@@ -124,6 +122,13 @@ export const ButtonsContainer = styled.div`
   display: flex;
   gap: 0.75rem;
   button {
+    display: flex;
+    input {
+      display: flex;
+      cursor: pointer;
+      opacity: 1;
+      width: 100%;
+    }
     cursor: pointer;
 
     font-family: "Roboto";
@@ -144,19 +149,35 @@ export const ButtonsContainer = styled.div`
     padding: 1rem;
     gap: 12px;
 
-    background: ${(props) => props.theme["base-button"]};
 
     border-radius: 6px;
-    border: none;
     order: 0;
     flex-grow: 1;
     width: 100%;
 
-    border: 1px solid ${(props) => props.theme["base-button"]};
-
+    border: 1px solid ${(props) => props.theme["base-text"]};
     :hover {
       background: ${(props) => props.theme["purple-light"]};
       border: 1px solid ${(props) => props.theme.purple};
-    }
   }
+  }
+`;
+
+export const StyledButton = styled.input`
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  outline: none;
+
+  &.selected {
+    background-color: black;
+    color: white;
+  }
+`;
+
+export const ToggleButton = styled.div`
+  background-color: red;
 `;
