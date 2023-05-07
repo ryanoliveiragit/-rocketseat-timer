@@ -13,4 +13,11 @@ export const Title = styled.h1`
     line-height: 130%;
 
     color: ${(props) => props.theme["base-subtitle"]}
-` 
+`
+
+export const Card = styled.div`
+    ul {
+        background: red;
+    }
+    background: color;
+`

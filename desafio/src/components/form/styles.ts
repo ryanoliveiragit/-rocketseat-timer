@@ -118,50 +118,6 @@ export const Payment = styled.div`
   flex-direction: column;
   gap: 2rem;
 `;
-export const ButtonsContainer = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  button {
-    display: flex;
-    input {
-      display: flex;
-      cursor: pointer;
-      opacity: 1;
-      width: 100%;
-    }
-    cursor: pointer;
-
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.75rem;
-    line-height: 160%;
-
-    text-transform: uppercase;
-
-    color: ${(props) => props.theme["base-text"]};
-    order: 1;
-    flex-grow: 0;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 1rem;
-    gap: 12px;
-
-
-    border-radius: 6px;
-    order: 0;
-    flex-grow: 1;
-    width: 100%;
-
-    border: 1px solid ${(props) => props.theme["base-text"]};
-    :hover {
-      background: ${(props) => props.theme["purple-light"]};
-      border: 1px solid ${(props) => props.theme.purple};
-  }
-  }
-`;
 
 export const StyledButton = styled.input`
   background-color: white;

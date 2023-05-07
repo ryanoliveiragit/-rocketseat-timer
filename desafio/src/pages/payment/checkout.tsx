@@ -5,7 +5,8 @@ import { useCart } from "../../contexts/myContexts";
 import { Form } from "../../components/form";
 import { 
   Container,
-  Title
+  Title,
+  Card
  } from "./styles";
 
 export function Checkout() {
@@ -40,7 +41,7 @@ export function Checkout() {
         <div>
           <Form />
         </div>
-        <div>
+        <Card>
           <ul>
             {sortedKeys.map((name) => {
               const cafe = groupedCoffees[name][0];
@@ -55,7 +56,7 @@ export function Checkout() {
               );
             })}
           </ul>
-        </div>
+        </Card>
       </Container>
     </Layout>
   );
