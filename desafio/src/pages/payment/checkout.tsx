@@ -55,6 +55,7 @@ export function Checkout() {
                 </div>
               );
             })}
+
           </ul>
         </Card>
       </Container>

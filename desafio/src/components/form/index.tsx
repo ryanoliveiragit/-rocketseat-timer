@@ -11,6 +11,7 @@ import {
 import { MapPin, CurrencyDollar } from "@phosphor-icons/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCart } from "../../contexts/myContexts";
 
 const cepValidator = z.string().refine(
   (cep) => {
@@ -31,13 +32,16 @@ const schema = z.object({
   bairro: z.string().nonempty({ message: "Campo obrigatório" }),
   cidade: z.string().nonempty({ message: "Campo obrigatório" }),
   uf: z.string().nonempty({ message: "Campo obrigatório" }),
+  payment: z.string()
 });
 
 type FormProps = z.infer<typeof schema>;
 
 import { useForm } from "react-hook-form";
 
+
 export function Form() {
+
   const {
     handleSubmit,
     register,
@@ -106,6 +110,7 @@ export function Form() {
             </InputNumberAndComplement>
 
             <InputNumberAndComplement>
+
               <DefaultInput>
                 <input
                   {...register("bairro")}
@@ -113,7 +118,13 @@ export function Form() {
                   placeholder="Bairro"
                 />
               </DefaultInput>
-              <input {...register("cidade")} type="text" placeholder="Cidade" />
+
+              <input 
+                {...register("cidade")}
+                type="text"
+                placeholder="Cidade"
+              />
+
               <input
                 {...register("uf")}
                 type="text"
@@ -135,8 +146,8 @@ export function Form() {
             </p>
           </AdressDescription>
         </Payment>
-        <button type="submit">submit</button>
       </form>
+       <button onClick={handleSubmit(onSubmit)}>Enviar</button>
     </Container>
   );
 }

@@ -1,32 +1,28 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { CoffeeType } from "../@types/coffe";
 
-/** Aqui vai a tipagem de tudo o que você vai "exportar" para usar em outros lugares,
- * tanto funções, variáveis, e etc */
 type CartContextType = {
   addNewItem: (data: CoffeeType) => void;
   removeItem: (itemId: number) => void;
   countItems: (productId: number) => number;
-
   shoppingCart: CoffeeType[];
   cart: CoffeeType[];
+  submitRef: React.MutableRefObject<HTMLButtonElement | null>;
 };
 
-// Aqui cria o contexto passando a tipagem
 const CartContext = createContext({} as CartContextType);
 
-// Props do provider, todos os providers sempre vai receber o children, pois vai por volta de toda sua aplicação no App.tsx
 type CartProviderProps = {
   children: React.ReactNode;
 };
 
-//Aqui tu cria o provider
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CoffeeType[]>(() => {
     const storedCart = localStorage.getItem("coffeeCart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
+
+  const submitRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     localStorage.setItem("coffeeCart", JSON.stringify(cart));
@@ -44,6 +40,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart([...cart, newCart]);
   };
 
+
   const countItems = (itemId: number) => {
     return cart.filter((item) => item.id === itemId).length;
   };
@@ -59,8 +56,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(updatedCart);
   };
 
-  /** Aqui tu retorna o provider passando os valores que definiu lá nos types */
-  // E no value, passa as funcoes que tu quer usar em qualquer lugar no teu projet
   return (
     <CartContext.Provider
       value={{
@@ -69,6 +64,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         removeItem,
         countItems,
         shoppingCart: cart,
+        submitRef,
       }}
     >
       {children}
@@ -76,5 +72,4 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   );
 };
 
-// Aqui tu cria um hook pra usar em outros lugares
 export const useCart = () => useContext(CartContext);
