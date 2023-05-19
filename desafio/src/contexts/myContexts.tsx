@@ -12,6 +12,7 @@ type CartContextType = {
 
 const CartContext = createContext({} as CartContextType);
 
+
 type CartProviderProps = {
   children: React.ReactNode;
 };

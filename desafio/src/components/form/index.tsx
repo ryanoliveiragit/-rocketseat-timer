@@ -12,6 +12,7 @@ import { MapPin, CurrencyDollar } from "@phosphor-icons/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCart } from "../../contexts/myContexts";
+import { useFormContext, FormProvider } from "react-hook-form";
 
 const cepValidator = z.string().refine(
   (cep) => {
@@ -32,16 +33,16 @@ const schema = z.object({
   bairro: z.string().nonempty({ message: "Campo obrigatório" }),
   cidade: z.string().nonempty({ message: "Campo obrigatório" }),
   uf: z.string().nonempty({ message: "Campo obrigatório" }),
-  payment: z.string()
+  payment: z.string(),
 });
 
 type FormProps = z.infer<typeof schema>;
 
 import { useForm } from "react-hook-form";
-
+import { DAWD } from "./buttinho";
 
 export function Form() {
-
+  const methods = useFormContext();
   const {
     handleSubmit,
     register,
@@ -55,99 +56,100 @@ export function Form() {
 
   function onSubmit(data: any) {
     console.log(data);
-    reset()
+    reset();
   }
 
   console.log(errors);
   return (
     <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ContainerForm>
-          <AdressDescription>
-            <div>
-              <MapPin size={20} color="#C47F17" />
-              <h1>Endereço de Entrega</h1>
-            </div>
-            <p>Informe o endereço onde deseja receber seu pedido</p>
-          </AdressDescription>
-
-          <ContainerInputs>
-            <DefaultInput>
-              <input
-                {...register("cep")}
-                type="text"
-                placeholder="CEP"
-                pattern="[0-9]*"
-              />
-            </DefaultInput>
-
-            <InputStreat>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <ContainerForm>
+            <AdressDescription>
               <div>
-                <input
-                  {...register("rua")}
-                  type="text"
-                  placeholder="Rua"
-                  maxLength={40}
-                />
+                <MapPin size={20} color="#C47F17" />
+                <h1>Endereço de Entrega</h1>
               </div>
-            </InputStreat>
+              <p>Informe o endereço onde deseja receber seu pedido</p>
+            </AdressDescription>
 
-            <InputNumberAndComplement>
-              <input
-                {...register("numero")}
-                type="number"
-                id="numero"
-                placeholder="Número"
-                maxLength={15}
-              />
+            <ContainerInputs>
               <DefaultInput>
                 <input
-                  {...register("complemento")}
+                  {...register("cep")}
                   type="text"
-                  placeholder="Complemento"
-                />
-              </DefaultInput>
-            </InputNumberAndComplement>
-
-            <InputNumberAndComplement>
-
-              <DefaultInput>
-                <input
-                  {...register("bairro")}
-                  type="text"
-                  placeholder="Bairro"
+                  placeholder="CEP"
+                  pattern="[0-9]*"
                 />
               </DefaultInput>
 
-              <input 
-                {...register("cidade")}
-                type="text"
-                placeholder="Cidade"
-              />
+              <InputStreat>
+                <div>
+                  <input
+                    {...register("rua")}
+                    type="text"
+                    placeholder="Rua"
+                    maxLength={40}
+                  />
+                </div>
+              </InputStreat>
 
-              <input
-                {...register("uf")}
-                type="text"
-                id="uf"
-                maxLength={2}
-                placeholder="UF"
-              />
-            </InputNumberAndComplement>
-          </ContainerInputs>
-        </ContainerForm>
-        <Payment>
-          <AdressDescription>
-            <div>
-              <CurrencyDollar size={20} color="#8047F8" />
-              <h1>Pagamento</h1>
-            </div>
-            <p>
-              O pagamento é feito na entrega. Escolha a forma que deseja pagar
-            </p>
-          </AdressDescription>
-        </Payment>
-      </form>
-       <button onClick={handleSubmit(onSubmit)}>Enviar</button>
+              <InputNumberAndComplement>
+                <input
+                  {...register("numero")}
+                  type="number"
+                  id="numero"
+                  placeholder="Número"
+                  maxLength={15}
+                />
+                <DefaultInput>
+                  <input
+                    {...register("complemento")}
+                    type="text"
+                    placeholder="Complemento"
+                  />
+                </DefaultInput>
+              </InputNumberAndComplement>
+
+              <InputNumberAndComplement>
+                <DefaultInput>
+                  <input
+                    {...register("bairro")}
+                    type="text"
+                    placeholder="Bairro"
+                  />
+                </DefaultInput>
+
+                <input
+                  {...register("cidade")}
+                  type="text"
+                  placeholder="Cidade"
+                />
+
+                <input
+                  {...register("uf")}
+                  type="text"
+                  id="uf"
+                  maxLength={2}
+                  placeholder="UF"
+                />
+              </InputNumberAndComplement>
+            </ContainerInputs>
+          </ContainerForm>
+          <Payment>
+            <AdressDescription>
+              <div>
+                <CurrencyDollar size={20} color="#8047F8" />
+                <h1>Pagamento</h1>
+              </div>
+              <p>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </p>
+            </AdressDescription>
+          </Payment>
+        </form>
+      </FormProvider>
+      <DAWD />
     </Container>
   );
 }
