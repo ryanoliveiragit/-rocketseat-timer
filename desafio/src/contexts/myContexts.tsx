@@ -51,6 +51,7 @@ type adressType = {
 };
 const CartContext = createContext({} as CartContextType);
 
+
 type CartProviderProps = {
   children: React.ReactNode;
 };
