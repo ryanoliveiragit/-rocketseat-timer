@@ -2,27 +2,27 @@ import { CoffeeType } from "../../@types/coffe";
 import { useCart } from "../../contexts/myContexts";
 import {
   Container,
-  Title,
   Card,
   ControlerContainer,
   ImageCoffe,
   NameAndPrice,
   Divider,
   ContainerCountValue,
-  Value
+  Value,
 } from "./styles";
 import { ControlerCart } from "../../components/controlerCart";
 import { Trash } from "@phosphor-icons/react";
 
 export function Checkout() {
-  const { cart, addNewItem, removeItem, countItems, addNewAdress, adress } =
-    useCart();
+  const { cart, addNewItem, removeItem, countItems } = useCart();
 
   function addcart(data: CoffeeType) {
+    addNewItem(data);
     addNewItem(data);
   }
 
   function removeCart(itemId: number) {
+    removeItem(itemId);
     removeItem(itemId);
   }
 
@@ -41,6 +41,7 @@ export function Checkout() {
   const sortedKeys = Object.keys(groupedCoffees).sort();
 
   console.log(cart);
+  console.log(cart);
 
   return (
     <Container>
@@ -52,33 +53,42 @@ export function Checkout() {
             return (
               <div>
                 <ControlerContainer>
-                <ImageCoffe>
-                  <img src={cafe.image} alt={cafe.description} />
-                </ImageCoffe>
-                <ContainerCountValue>
-                  <NameAndPrice>
+                  <ImageCoffe>
+                    <img src={cafe.image} alt={cafe.description} />
+                  </ImageCoffe>
+                  <ContainerCountValue>
+                    <NameAndPrice>
+                      <div>
+                        <li>{cafe.name}</li>
+                        <Value>
+                          <span>R$ {cafe.price}</span>
+                        </Value>
+                      </div>
+                    </NameAndPrice>
                     <div>
-                      <li>{cafe.name}</li>
-                      <Value><span>R$ {cafe.price}</span></Value>
-                    </div>
-                  </NameAndPrice>
-                  <div>
-                    <ControlerCart>
-                      <button type="button" onClick={() => removeCart(cafe.id)}>-</button>
-                      <span>{count}</span>
-                      <button type="button" onClick={() => addcart(cafe)}>+</button>
-                    </ControlerCart>
+                      <ControlerCart>
+                        <button
+                          type="button"
+                          onClick={() => removeCart(cafe.id)}
+                        >
+                          -
+                        </button>
+                        <span>{count}</span>
+                        <button type="button" onClick={() => addcart(cafe)}>
+                          +
+                        </button>
+                      </ControlerCart>
 
-                    <ControlerCart>
-                      <button type="button">
-                        <Trash color="#8047F8" />
-                        <p>Remover</p>
-                      </button>
-                    </ControlerCart>
-                  </div>
-                </ContainerCountValue>
-              </ControlerContainer>
-              <Divider />
+                      <ControlerCart>
+                        <button type="button">
+                          <Trash color="#8047F8" />
+                          <p>Remover</p>
+                        </button>
+                      </ControlerCart>
+                    </div>
+                  </ContainerCountValue>
+                </ControlerContainer>
+                <Divider />
               </div>
             );
           })}
