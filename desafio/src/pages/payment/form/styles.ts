@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const Flex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const CartContainer = styled.div`
+  border-radius: 6px 36px;
+  height: 100%;
+  background-color: ${(props) => props.theme["base-card"]};
+`;
 export const Container = styled.div`
   border-radius: 6px;
 
@@ -134,6 +143,115 @@ export const StyledButton = styled.input`
   }
 `;
 
-export const ToggleButton = styled.div`
-  background-color: red;
+export const Values = styled.div`
+  padding: 0rem 2.5rem;
+  > div {
+    span {
+      font-size: 14px;
+      line-height: 18.2px;
+      font-weight: 400;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+`;
+export const ValueNumber = styled.h1`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+
+  display: flex;
+  align-items: center;
+  color: ${(props) => props.theme["base-text"]};
+  text-align: right;
+`;
+export const ValueTotalNumber = styled.h1`
+  /* Text/Bold L */
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 130%;
+  /* identical to box height, or 26px */
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+
+  /* Base/Subtitle */
+
+  color: ${(props) => props.theme["base-subtitle"]};
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+`;
+export const Total = styled.div`
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 130%;
+  /* identical to box height, or 26px */
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+
+  /* Base/Subtitle */
+
+  color: ${(props) => props.theme["base-subtitle"]};
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`;
+export const ButtonSubmit = styled.button`
+  cursor: pointer;
+  &.enabled:hover {
+    background-color: ${(props) => props.theme["yellow-dark"]};
+  }
+  &.disabled {
+    cursor: not-allowed;
+    background-color: ${(props) => props.theme["base-label"]};
+  }
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+  background-color: ${(props) => props.theme.yellow};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 8px;
+  gap: 4px;
+  width: 85%;
+  border: none;
+  border-radius: 6px;
+  flex: none;
+  order: 5;
+  align-self: stretch;
+  flex-grow: 0;
+
+  /* Components/Button G */
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 160%;
+  /* or 22px */
+
+  text-transform: uppercase;
+
+  /* Base/White */
+
+  color: ${(props) => props.theme.white};
+  font-stretch: 100;
+
+  margin-bottom: 2.5rem;
 `;

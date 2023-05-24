@@ -1,5 +1,33 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CoffeeType } from "../@types/coffe";
+
+type SubmitButtonContextType = {
+  children: ReactNode;
+  onSubmit: any;
+};
+
+const SubmitButtonContext = createContext({});
+
+export function useFormContext() {
+  return useContext(SubmitButtonContext);
+}
+
+export function SubmitButtonProvider({
+  children,
+  onSubmit,
+}: SubmitButtonContextType) {
+  return (
+    <SubmitButtonContext.Provider value={onSubmit}>
+      {children}
+    </SubmitButtonContext.Provider>
+  );
+}
 
 type CartContextType = {
   addNewItem: (data: CoffeeType) => void;
@@ -7,9 +35,20 @@ type CartContextType = {
   countItems: (productId: number) => number;
   shoppingCart: CoffeeType[];
   cart: CoffeeType[];
-  submitRef: React.MutableRefObject<HTMLButtonElement | null>;
+  adress: adressType[];
+  setCart: React.Dispatch<React.SetStateAction<CoffeeType[]>>;
+  addNewAdress: (data: adressType) => void;
 };
 
+type adressType = {
+  cep: number;
+  uf: string;
+  rua: string;
+  numero: number;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+};
 const CartContext = createContext({} as CartContextType);
 
 type CartProviderProps = {
@@ -22,7 +61,26 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     return storedCart ? JSON.parse(storedCart) : [];
   });
 
-  const submitRef = useRef<HTMLButtonElement | null>(null);
+  const [adress, setAdress] = useState<adressType[]>(() => {
+    const storeAdress = localStorage.getItem("adress");
+    return storeAdress ? JSON.parse(storeAdress) : [];
+  });
+
+  const addNewAdress = (data: adressType) => {
+    const newAdress: adressType = {
+      rua: data.rua,
+      cidade: data.cidade,
+      bairro: data.bairro,
+      cep: data.cep,
+      complemento: data.complemento,
+      numero: data.numero,
+      uf: data.uf,
+    };
+    setAdress([...adress, newAdress]);
+  };
+  useEffect(() => {
+    localStorage.setItem("adress", JSON.stringify(adress));
+  }, [adress]);
 
   useEffect(() => {
     localStorage.setItem("coffeeCart", JSON.stringify(cart));
@@ -39,7 +97,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     };
     setCart([...cart, newCart]);
   };
-
 
   const countItems = (itemId: number) => {
     return cart.filter((item) => item.id === itemId).length;
@@ -64,7 +121,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         removeItem,
         countItems,
         shoppingCart: cart,
-        submitRef,
+        setCart,
+        addNewAdress,
+        adress,
       }}
     >
       {children}

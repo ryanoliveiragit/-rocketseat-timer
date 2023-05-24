@@ -1,64 +1,89 @@
 import { CoffeeType } from "../../@types/coffe";
-import { Navbar } from "../../components/header/navBar";
-import { Layout } from "../../components/layout";
 import { useCart } from "../../contexts/myContexts";
-import { Form } from "../../components/form";
-import { 
+import {
   Container,
   Title,
-  Card
- } from "./styles";
+  Card,
+  ControlerContainer,
+  ImageCoffe,
+  NameAndPrice,
+  Divider,
+  ContainerCountValue,
+  Value
+} from "./styles";
+import { ControlerCart } from "../../components/controlerCart";
+import { Trash } from "@phosphor-icons/react";
 
 export function Checkout() {
-  const { cart, addNewItem, removeItem, countItems } = useCart();
+  const { cart, addNewItem, removeItem, countItems, addNewAdress, adress } =
+    useCart();
 
   function addcart(data: CoffeeType) {
-    addNewItem(data)
+    addNewItem(data);
   }
 
   function removeCart(itemId: number) {
-    removeItem(itemId)
+    removeItem(itemId);
   }
 
-  const groupedCoffees = cart.reduce((groups: { [key: string]: CoffeeType[] }, cafe) => {
-    const name = cafe.name;
-    if (!groups[name]) {
-      groups[name] = [];
-    }
-    groups[name].push(cafe);
-    return groups;
-  }, {});
+  const groupedCoffees = cart.reduce(
+    (groups: { [key: string]: CoffeeType[] }, cafe) => {
+      const name = cafe.name;
+      if (!groups[name]) {
+        groups[name] = [];
+      }
+      groups[name].push(cafe);
+      return groups;
+    },
+    {}
+  );
 
   const sortedKeys = Object.keys(groupedCoffees).sort();
 
-  console.log(cart)
+  console.log(cart);
 
   return (
-    <Layout>
-      <Navbar />
-      <Title>Complete seu pedido</Title>
-      <Container>
-        <div>
-          <Form />
-        </div>
-        <Card>
-          <ul>
-            {sortedKeys.map((name) => {
-              const cafe = groupedCoffees[name][0];
-              const count = countItems(cafe.id)
-              return (
-                <div>
-                  <li>{cafe.name}</li>
-                  <button onClick={() => addcart(cafe)}>Adicionar</button>
-                  <span>{count}</span>
-                  <button onClick={() => removeCart(cafe.id)}>remover</button>
-                </div>
-              );
-            })}
+    <Container>
+      <Card>
+        <ul>
+          {sortedKeys.map((name) => {
+            const cafe = groupedCoffees[name][0];
+            const count = countItems(cafe.id);
+            return (
+              <div>
+                <ControlerContainer>
+                <ImageCoffe>
+                  <img src={cafe.image} alt={cafe.description} />
+                </ImageCoffe>
+                <ContainerCountValue>
+                  <NameAndPrice>
+                    <div>
+                      <li>{cafe.name}</li>
+                      <Value><span>R$ {cafe.price}</span></Value>
+                    </div>
+                  </NameAndPrice>
+                  <div>
+                    <ControlerCart>
+                      <button type="button" onClick={() => removeCart(cafe.id)}>-</button>
+                      <span>{count}</span>
+                      <button type="button" onClick={() => addcart(cafe)}>+</button>
+                    </ControlerCart>
 
-          </ul>
-        </Card>
-      </Container>
-    </Layout>
+                    <ControlerCart>
+                      <button type="button">
+                        <Trash color="#8047F8" />
+                        <p>Remover</p>
+                      </button>
+                    </ControlerCart>
+                  </div>
+                </ContainerCountValue>
+              </ControlerContainer>
+              <Divider />
+              </div>
+            );
+          })}
+        </ul>
+      </Card>
+    </Container>
   );
 }
