@@ -105,13 +105,27 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   };
 
   const [historyCount, sethistoryCount] = useState(0);
+  const [nextPurchaseId, setNextPurchaseId] = useState(1);
 
   const historyContext = () => {
-    setHistory([...history, ...cart]);
+    const purchaseItems = cart.reduce((items, item) => {
+      const existingItem = items.find((i) => i.idCompra === item.idCompra && i.id === item.id);
+      if (existingItem) {
+        existingItem.count += 1; // Incrementa a contagem do item existente
+      } else {
+        const newItem = { ...item, count: 1 };
+        items.push(newItem);
+      }
+      return items;
+    }, [] as CoffeeType[]);
+  
+    setHistory([...history, ...purchaseItems]);
+    setNextPurchaseId(nextPurchaseId + 1);
   };
 
   const addNewItem = (data: CoffeeType) => {
     const newCart: CoffeeType = {
+      idCompra: nextPurchaseId + 1,
       name: data.name,
       id: data.id,
       description: data.description,

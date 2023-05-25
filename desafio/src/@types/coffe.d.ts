@@ -6,4 +6,5 @@ export type CoffeeType = {
     tag: string[];
     price: number;
     count?: any;
+    idCompra: number;
   };
