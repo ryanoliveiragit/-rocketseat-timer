@@ -138,7 +138,35 @@ export const Button = styled.button`
     color: ${(props) => props.theme["purple-dark"]};
   }
 `;
-
+export const HistoryCart = styled(Button)`
+  margin-left: 3rem;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme["yellow-light"]};
+  :hover {
+    transition: background-color 0.15s ease-out;
+    cursor: pointer;
+    background-color: ${(props) => props.theme["yellow-dark"]};
+    svg {
+      color: ${(props) => props.theme["yellow-light"]};
+    }
+  }
+  svg {
+    color: ${(props) => props.theme["yellow-dark"]};
+  }
+  p {
+    position: absolute;
+    color: ${(props) => props.theme.white};
+    font-size: 0.7rem;
+    background-color: ${(props) => props.theme["yellow-dark"]};;
+    padding: 0.25rem .4rem;
+    border-radius: 100%;
+    right: -0.3rem;
+    top: -1.6rem;
+  }
+`
 export const Cart = styled(Button)`
   position: absolute;
   display: flex;
@@ -161,7 +189,7 @@ export const Cart = styled(Button)`
     color: ${(props) => props.theme.white};
     font-size: 0.7rem;
     background-color: ${(props) => props.theme["yellow-dark"]};;
-    padding: 0.25rem .5rem;
+    padding: 0.25rem .4rem;
     border-radius: 100%;
     right: -0.3rem;
     top: -1.6rem;

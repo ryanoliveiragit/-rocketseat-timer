@@ -41,7 +41,6 @@ export function Checkout() {
   const sortedKeys = Object.keys(groupedCoffees).sort();
 
   console.log(cart);
-  console.log(cart);
 
   return (
     <Container>

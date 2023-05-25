@@ -38,6 +38,10 @@ type CartContextType = {
   adress: adressType[];
   setCart: React.Dispatch<React.SetStateAction<CoffeeType[]>>;
   addNewAdress: (data: adressType) => void;
+  historyContext: (data: CoffeeType) => void;
+  history: CoffeeType[]
+  historyCount: number;
+  sethistoryCount: (data: number) => void;
 };
 
 type adressType = {
@@ -62,10 +66,28 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     return storedCart ? JSON.parse(storedCart) : [];
   });
 
+  const [history, setHistory] = useState<CoffeeType[]>(() => {
+    const historyCart = localStorage.getItem("historyCart");
+    return historyCart ? JSON.parse(historyCart) : [];
+  });
+
   const [adress, setAdress] = useState<adressType[]>(() => {
     const storeAdress = localStorage.getItem("adress");
     return storeAdress ? JSON.parse(storeAdress) : [];
   });
+
+  useEffect(() => {
+    localStorage.setItem("adress", JSON.stringify(adress));
+  }, [adress]);
+
+  useEffect(() => {
+    localStorage.setItem("historyCart", JSON.stringify(history));
+  }, [history]);
+
+  useEffect(() => {
+    localStorage.setItem("coffeeCart", JSON.stringify(cart));
+  }, [cart]);
+
 
   const addNewAdress = (data: adressType) => {
     const newAdress: adressType = {
@@ -79,13 +101,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     };
     setAdress([...adress, newAdress]);
   };
-  useEffect(() => {
-    localStorage.setItem("adress", JSON.stringify(adress));
-  }, [adress]);
 
-  useEffect(() => {
-    localStorage.setItem("coffeeCart", JSON.stringify(cart));
-  }, [cart]);
+  const [historyCount, sethistoryCount] = useState(0)
+
+  const historyContext = () => {
+    setHistory([...history, ...cart]);
+  }
 
   const addNewItem = (data: CoffeeType) => {
     const newCart: CoffeeType = {
@@ -117,6 +138,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   return (
     <CartContext.Provider
       value={{
+        sethistoryCount,
+        historyCount,
+        historyContext,
+        history,
         addNewItem,
         cart,
         removeItem,

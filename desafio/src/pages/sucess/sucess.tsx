@@ -1,4 +1,4 @@
-import delivery from '../../assets/delivery.svg'
+import delivery from "../../assets/delivery.svg";
 import { useCart } from "../../contexts/myContexts";
 import { Layout } from "../../components/layout";
 import { Navbar } from "../../components/header/navBar";
@@ -11,12 +11,13 @@ import {
   IconLocation,
   IconDollar,
   IconTimer,
-  Image
+  Image,
 } from "./styles";
 import { MapPin, Timer, CurrencyDollar } from "@phosphor-icons/react";
 
 export function Sucess() {
-  const { adress } = useCart();
+  const { adress, history } = useCart();
+  console.log(history)
 
   const lastAddress = adress.length > 0 ? adress[adress.length - 1] : null;
 
@@ -75,6 +76,15 @@ export function Sucess() {
                 </div>
               )}
             </ContainerAdress>
+          </div>
+          <div>
+            {history.map((item) => {
+              return (
+                <div>
+                  <span>{item.name}</span>
+                </div>
+              );
+            })}
           </div>
           <Image>
             <img src={delivery} alt="delivery" />

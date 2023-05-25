@@ -10,6 +10,7 @@ import { ShoppingCart, Timer, Package, Coffee } from "@phosphor-icons/react";
 import { Navbar } from "./navBar";
 
 export function Header() {
+
   return (
     <Container>
       <Navbar />

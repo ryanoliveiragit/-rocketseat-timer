@@ -51,7 +51,7 @@ import { Navbar } from "../../../components/header/navBar";
 
 export function Form() {
   const navigate = useNavigate();
-  const { cart, adress, addNewAdress, setCart } = useCart();
+  const { cart, addNewAdress, setCart, historyContext, sethistoryCount, historyCount } = useCart();
 
   const {
     handleSubmit,
@@ -67,10 +67,13 @@ export function Form() {
   function onSubmit(data: any) {
     addNewAdress(data);
     reset();
-    console.log(adress);
-    navigate('/sucess')
-    setCart([]);
+    sethistoryCount(1)
+    setCart([]); // Limpa o carrinho antes de transferir os itens para 'history'
+    historyContext(data);
+    navigate('/sucess') // Adiciona os itens de 'cart' a 'history'
   }
+  console.log(historyCount)
+  console.log(errors)
 
   const totalPrice = cart.reduce((total, coffee) => total + coffee.price, 0);
   const number = totalPrice;
@@ -82,6 +85,7 @@ export function Form() {
   const buttonClass = isCartEmpty ? "disabled" : "enabled";
 
   console.log(errors);
+
   return (
     <Layout>
       <Container>
