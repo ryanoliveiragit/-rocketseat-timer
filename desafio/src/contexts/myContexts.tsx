@@ -39,7 +39,7 @@ type CartContextType = {
   setCart: React.Dispatch<React.SetStateAction<CoffeeType[]>>;
   addNewAdress: (data: adressType) => void;
   historyContext: (data: CoffeeType) => void;
-  history: CoffeeType[]
+  history: CoffeeType[];
   historyCount: number;
   sethistoryCount: (data: number) => void;
 };
@@ -55,7 +55,6 @@ type adressType = {
 };
 const CartContext = createContext({} as CartContextType);
 
-
 type CartProviderProps = {
   children: React.ReactNode;
 };
@@ -63,7 +62,11 @@ type CartProviderProps = {
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CoffeeType[]>(() => {
     const storedCart = localStorage.getItem("coffeeCart");
-    return storedCart ? JSON.parse(storedCart) : [];
+    if (storedCart) {
+      const parsedCart: CoffeeType[] = JSON.parse(storedCart);
+      return parsedCart.map((item) => ({ ...item, count: 1 }));
+    }
+    return [];
   });
 
   const [history, setHistory] = useState<CoffeeType[]>(() => {
@@ -88,7 +91,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     localStorage.setItem("coffeeCart", JSON.stringify(cart));
   }, [cart]);
 
-
   const addNewAdress = (data: adressType) => {
     const newAdress: adressType = {
       rua: data.rua,
@@ -102,11 +104,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setAdress([...adress, newAdress]);
   };
 
-  const [historyCount, sethistoryCount] = useState(0)
+  const [historyCount, sethistoryCount] = useState(0);
 
   const historyContext = () => {
     setHistory([...history, ...cart]);
-  }
+  };
 
   const addNewItem = (data: CoffeeType) => {
     const newCart: CoffeeType = {

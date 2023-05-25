@@ -77,15 +77,6 @@ export function Sucess() {
               )}
             </ContainerAdress>
           </div>
-          <div>
-            {history.map((item) => {
-              return (
-                <div>
-                  <span>{item.name}</span>
-                </div>
-              );
-            })}
-          </div>
           <Image>
             <img src={delivery} alt="delivery" />
           </Image>

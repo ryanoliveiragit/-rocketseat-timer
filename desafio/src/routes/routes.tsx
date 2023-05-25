@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "../pages/home";
 import { Form } from "../pages/payment/form/form";
 import { Sucess } from "../pages/sucess/sucess";
-import { History } from "../pages/home/history";
+import { History } from "../pages/history";
 
 export function Router() {
 

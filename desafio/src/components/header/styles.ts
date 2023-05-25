@@ -139,7 +139,7 @@ export const Button = styled.button`
   }
 `;
 export const HistoryCart = styled(Button)`
-  margin-left: 3rem;
+  margin-left: 2.5rem;
   position: absolute;
   display: flex;
   justify-content: center;
