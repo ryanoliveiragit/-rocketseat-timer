@@ -105,7 +105,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   };
 
   const [historyCount, sethistoryCount] = useState(0);
-  const [nextPurchaseId, setNextPurchaseId] = useState(1);
+  const [nextPurchaseId, setNextPurchaseId] = useState(0);
 
   const historyContext = () => {
     const purchaseItems = cart.reduce((items, item) => {

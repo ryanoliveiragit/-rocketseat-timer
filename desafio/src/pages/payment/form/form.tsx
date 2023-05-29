@@ -149,6 +149,7 @@ export function Form() {
                   </DefaultInput>
 
                   <input
+                  id="cidade"
                     {...register("cidade")}
                     type="text"
                     placeholder="Cidade"

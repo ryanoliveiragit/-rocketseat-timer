@@ -63,6 +63,9 @@ export const InputNumberAndComplement = styled(baseInput)`
   #uf {
     width: 5%;
   }
+  #cidade {
+    width: 20%;
+  }
   #numero {
     width: 45%;
   }
