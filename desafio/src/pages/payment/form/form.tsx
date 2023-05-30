@@ -14,8 +14,9 @@ import {
   ValueTotalNumber,
   Total,
   ButtonSubmit,
+  ContainerButtons,
 } from "./styles";
-import { MapPin, CurrencyDollar } from "@phosphor-icons/react";
+import { MapPin, CurrencyDollar, CreditCard, Bank, Money } from "@phosphor-icons/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkout } from "../checkout";
@@ -41,6 +42,7 @@ const schema = z.object({
   bairro: z.string().nonempty({ message: "Campo obrigatório" }),
   cidade: z.string().nonempty({ message: "Campo obrigatório" }),
   uf: z.string().nonempty({ message: "Campo obrigatório" }),
+  payment: z.string(),
 });
 
 type FormProps = z.infer<typeof schema>;
@@ -48,10 +50,18 @@ type FormProps = z.infer<typeof schema>;
 import { useForm } from "react-hook-form";
 import { useCart } from "../../../contexts/myContexts";
 import { Navbar } from "../../../components/header/navBar";
+import { useState } from "react";
 
 export function Form() {
   const navigate = useNavigate();
-  const { cart, addNewAdress, setCart, historyContext, sethistoryCount, historyCount } = useCart();
+  const {
+    cart,
+    addNewAdress,
+    setCart,
+    historyContext,
+    sethistoryCount,
+    historyCount,
+  } = useCart();
 
   const {
     handleSubmit,
@@ -67,14 +77,12 @@ export function Form() {
   function onSubmit(data: any) {
     addNewAdress(data);
     reset();
-    sethistoryCount(1)
+    sethistoryCount(1);
     setCart([]); // Limpa o carrinho antes de transferir os itens para 'history'
     historyContext(data);
-    navigate('/sucess') // Adiciona os itens de 'cart' a 'history'
+    navigate("/sucess"); // Adiciona os itens de 'cart' a 'history'
   }
-  console.log(historyCount)
-  console.log(errors)
-
+  const [activeButton, setActiveButton] = useState("");
   const totalPrice = cart.reduce((total, coffee) => total + coffee.price, 0);
   const number = totalPrice;
   const roundedNumber = parseFloat(number.toFixed(2)); // Converter para número com 2 casas decimais
@@ -84,7 +92,9 @@ export function Form() {
   const isCartEmpty = cart.length === 0;
   const buttonClass = isCartEmpty ? "disabled" : "enabled";
 
-  console.log(errors);
+  const handleClick = (value: string) => {
+    setActiveButton(value);
+  };
 
   return (
     <Layout>
@@ -149,7 +159,7 @@ export function Form() {
                   </DefaultInput>
 
                   <input
-                  id="cidade"
+                    id="cidade"
                     {...register("cidade")}
                     type="text"
                     placeholder="Cidade"
@@ -170,10 +180,50 @@ export function Form() {
                     <CurrencyDollar size={20} color="#8047F8" />
                     <h1>Pagamento</h1>
                   </div>
+
                   <p>
                     O pagamento é feito na entrega. Escolha a forma que deseja
                     pagar
                   </p>
+
+                  <ContainerButtons>
+                    <label
+                      className={activeButton === "debito" ? "active" : ""}
+                    >
+                      <CreditCard size={32} />
+                      <span>Cartão de crédito</span>
+                      <input
+                        type="radio"
+                        value="Cartão de cŕedito"
+                        {...register("payment")}
+                        onClick={() => handleClick("debito")}
+                      />
+                    </label>
+                    <label
+                      className={activeButton === "dinheiro" ? "active" : ""}
+                    >
+                      <Bank size={32} />
+                      <span>Cartão de débito</span>
+                      <input
+                        type="radio"
+                        value="Cartão de débito"
+                        {...register("payment")}
+                        onClick={() => handleClick("dinheiro")}
+                      />
+                    </label>
+                    <label
+                      className={activeButton === "cartao" ? "active" : ""}
+                    >
+                      <Money size={32} />
+                      <span>Dinheiro</span>
+                      <input
+                        type="radio"
+                        value="Dinheiro"
+                        {...register("payment")}
+                        onClick={() => handleClick("cartao")}
+                      />
+                    </label>
+                  </ContainerButtons>
                 </AdressDescription>
               </Payment>
             </ContainerForm>

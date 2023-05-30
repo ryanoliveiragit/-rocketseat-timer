@@ -122,14 +122,66 @@ export const AdressDescription = styled.div`
 `;
 
 export const Payment = styled.div`
-  padding: 2.5rem;
+  margin-top: 0rem;
+  padding: 2.5rem 0rem;
   background-color: ${(props) => props.theme["base-card"]};
   border-radius: 6px;
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 `;
+export const ContainerButtons = styled.div`
+    margin-top: 2rem;
+    gap: 12px;
+    display: flex;
+    label {
+      font-size: 13px;
+      text-transform: uppercase;
+      color: ${(props) => props.theme["base-text"]};
+    svg {
+      width: 1.3rem;
+      color: ${(props) => props.theme.purple}
+    }
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    input {
+      width: 0px;
+      display: none;
+      visibility: hidden;
+      position: absolute;
+    }
+    cursor: pointer;
+    background-color: red;
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 13px;
+    gap: 12px;
+
+    /* Brand/Purple Light */
+
+    background: ${(props) => props.theme["base-button"]};
+    /* Brand/Purple */
+
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+  }
+  label.active {
+    border: 1px solid ${(props) => props.theme.purple};
+    background: ${(props) => props.theme["purple-light"]};
+    }
+`
 
 export const StyledButton = styled.input`
   background-color: white;

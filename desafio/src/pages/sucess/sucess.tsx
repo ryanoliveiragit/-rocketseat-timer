@@ -67,9 +67,9 @@ export function Sucess() {
                     </IconDollar>
                     <div>
                       <p>
-                        Previsão de entrega
+                        Pagamento na entrega
                         <br />
-                        <strong>Cartão de crédito</strong>
+                        <strong>{lastAddress.payment}</strong>
                       </p>
                     </div>
                   </DeliveryAdress>

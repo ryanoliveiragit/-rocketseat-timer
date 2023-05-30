@@ -52,6 +52,7 @@ type adressType = {
   complemento: string;
   bairro: string;
   cidade: string;
+  payment: string;
 };
 const CartContext = createContext({} as CartContextType);
 
@@ -100,6 +101,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       complemento: data.complemento,
       numero: data.numero,
       uf: data.uf,
+      payment: data.payment
     };
     setAdress([...adress, newAdress]);
   };
