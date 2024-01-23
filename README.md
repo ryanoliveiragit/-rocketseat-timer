@@ -12,7 +12,7 @@ Projeto Pomodoro para administração de tempo.
 <br>
 
 <p align="center">
-  <img alt="Página da aplicação DtMoney" src="https://cdn.discordapp.com/attachments/1059174040767561838/1199159118934589550/image.png?ex=65c186f5&is=65af11f5&hm=ef83b8b381df6809d9cfa04300108bf399b36f094e9a738cb32ff9dc4d8b15d3&" width="100%">
+  <img alt="Página da aplicação DtMoney" src="https://cdn.discordapp.com/attachments/1122918221863993447/1199116857970536498/banner-1.png?ex=65c15f99&is=65aeea99&hm=b6eb39f0771b5e0bff84ed5910688f5742f9884a25a80fb4dace0218d5747a57&" width="100%">
 </p>
 
 ## 🚀 Tecnologias
